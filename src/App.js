@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import { configureStore } from "@reduxjs/toolkit"
+import { Provider } from 'react-redux';
+import userReducer from "./feautures/user"
+import themeReducer from "./feautures/theme"
+import CounterReducer from './feautures/Counter'
+import ChangeColor from './components/ChangeColor';
+import Counter from './components/Counter';
+import secondCounterReducer from './feautures/SecondCounter'
+import FetchApi from './components/FetchApi';
+import apiData from './feautures/apiData';
+import apiDataReducer from './feautures/apiData'
+
+const store = configureStore({
+  reducer : {
+    user : userReducer,
+    theme : themeReducer,
+    counter : CounterReducer,
+    secondCounter : secondCounterReducer,
+    apiData : apiDataReducer
+  }
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store} >
+      <Profile />
+      <Login />
+      <ChangeColor />
+      <Counter />
+      <FetchApi />
+    </Provider>
   );
 }
 
